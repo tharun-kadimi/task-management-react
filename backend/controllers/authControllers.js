@@ -7,21 +7,22 @@ const { validateEmail } = require("../utils/validation");
 exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    console.log(req.body)
     if (!name || !email || !password) {
       return res.status(400).json({ msg: "Please fill all the fields" });
     }
-    if (typeof name !== "string" || typeof email !== "string" || typeof password !== "string") {
-      return res.status(400).json({ msg: "Please send string values only" });
-    }
+    // if (typeof name !== "string" || typeof email !== "string" || typeof password !== "string") {
+    //   return res.status(400).json({ msg: "Please send string values only" });
+    // }
 
 
-    if (password.length < 4) {
-      return res.status(400).json({ msg: "Password length must be atleast 4 characters" });
-    }
+    // if (password.length < 4) {
+    //   return res.status(400).json({ msg: "Password length must be atleast 4 characters" });
+    // }
 
-    if (!validateEmail(email)) {
-      return res.status(400).json({ msg: "Invalid Email" });
-    }
+    // if (!validateEmail(email)) {
+    //   return res.status(400).json({ msg: "Invalid Email" });
+    // }
 
     const user = await User.findOne({ email });
     if (user) {

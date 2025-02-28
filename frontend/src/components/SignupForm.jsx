@@ -31,9 +31,16 @@ const SignupForm = () => {
       return;
     }
 
-    const config = { url: "/auth/signup", method: "post", data: formData };
+    const config = { url: "/auth/signup", method: "post", headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    }, data: formData };
     fetchData(config).then(() => {
       navigate("/login");
+    })
+    .catch((error) => { //3 lines added
+      console.error("Signup error:", error);
+      setFormErrors({ general: error.message || "Something went wrong" });
     });
 
   }
